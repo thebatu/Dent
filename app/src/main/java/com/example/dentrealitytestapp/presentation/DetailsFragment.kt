@@ -22,19 +22,20 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         setSelectedCountry()
 
         binding.submitBtn.setOnClickListener {
-            val userCountry = binding.homeCountry.text.toString()
-            viewModel.setUserCountry(userCountry)
+            viewModel.setUserCountry(args.countryName)
         }
     }
 
     private fun setSelectedCountry() {
         val countryArgs = args.countryName
         val countries = viewModel.getCountries()
-        val selectedCountry = countries?.filter { it.mName == countryArgs }?.get(0)
+        val selectedCountry = countries?.filter { it.name == countryArgs }?.get(0)
 
-        binding.countryCapital.text = selectedCountry?.MCapital
-        binding.countryName.text = selectedCountry?.mName
-        binding.distanceValue.text = selectedCountry?.mDistance.toString()
+        binding.apply {
+            countryCapital.text = selectedCountry?.capital
+            countryName.text = selectedCountry?.name
+            distanceValue.text = selectedCountry?.distance.toString()
+        }
     }
 
 }

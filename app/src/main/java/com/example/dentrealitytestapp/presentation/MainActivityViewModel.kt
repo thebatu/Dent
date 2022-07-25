@@ -3,8 +3,8 @@ package com.example.dentrealitytestapp.presentation
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.example.dentrealitytestapp.data.util.Converters
-import com.example.dentrealitytestapp.data.util.GsonParser
+import com.example.dentrealitytestapp.data.Repository
+import com.example.dentrealitytestapp.data.RepositoryImpl
 import com.example.dentrealitytestapp.models.CountriesModel
 import com.example.dentrealitytestapp.models.toLocation
 import com.google.maps.android.ktx.utils.sphericalDistance
@@ -14,43 +14,35 @@ import kotlin.collections.ArrayList
 class MainActivityViewModel(application: Application) : AndroidViewModel(application) {
     var countries = MutableLiveData<ArrayList<CountriesModel>>()
     private var _countries = ArrayList<CountriesModel>()
+    private var repository: Repository = RepositoryImpl(getApplication<Application>().applicationContext)
 
     init {
-        _countries = parseAndGetCountries()
+        _countries = repository.parseAndGetCountries()
         setCountries(_countries)
     }
 
-    private fun parseAndGetCountries(): ArrayList<CountriesModel> {
-        val converter = Converters(GsonParser(), getApplication<Application>().applicationContext)
-        return converter.fromCountriesJson(getApplication<Application>().applicationContext)
+    private fun setCountries(countries: ArrayList<CountriesModel>) {
+        this.countries.value = countries
     }
 
     fun setUserCountry(userCountry: String) {
-        if (countryIsValid(userCountry)) {
-            updateCountriesDistance(userCountry)
-            getCountries()
-        }
-    }
-
-    private fun countryIsValid(userCountry: String): Boolean {
-        return (userCountry.isNotEmpty() && userCountry.isNotBlank())
+        updateCountriesDistance(userCountry)
     }
 
     private fun updateCountriesDistance(userCountry: String) {
-        countries.value?.forEach { it.mDistance = calculateDistanceToEachCountry(userCountry) }
+        countries.value?.forEach { it.distance = calculateDistanceToEachCountry(userCountry) }
     }
 
     private fun calculateDistanceToEachCountry(userCountry: String): Double {
-
         val countryName = userCountry.capitalize()
-        val country: CountriesModel? = countries.value?.find { it.mName == countryName } //O(n)
+        val country: CountriesModel? = countries.value?.find { it.name == countryName } //O(n)
         if (country != null) {
             countries.value?.forEach { it ->
                 if (it == country) {
-                    it.mDistance = 0.0
+                    it.distance = 0.0
                 } else {
-                    it.mDistance = (it.toLocation()
-                        .sphericalDistance(country.toLocation())).div(1000) //O(n)
+                    it.distance = (it.toLocation()
+                        .sphericalDistance(country.toLocation())).div(1000)
                 }
             }
         }
@@ -58,14 +50,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
         return 0.0
     }
 
-
-    private fun setCountries(country: ArrayList<CountriesModel>) {
-        this.countries.value = country
-    }
-
     fun getCountries() = countries.value
-
-
 
 
 }

@@ -39,10 +39,10 @@ class HomeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener, OnMapReady
     }
 
     private fun displayMarkersOptions(googleMap: GoogleMap, country: CountriesModel){
-        val marker = googleMap.addMarker(
+        googleMap.addMarker(
             MarkerOptions()
-                .snippet(country.mDistance.toString())
-                .title(country.mName)
+                .snippet(country.distance.toString())
+                .title(country.name)
                 .position(country.toLocation())
         )
     }
@@ -66,7 +66,6 @@ class HomeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener, OnMapReady
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
     }

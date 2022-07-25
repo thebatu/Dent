@@ -6,24 +6,24 @@ import com.google.android.gms.maps.model.LatLng
 
 data class CountriesModel(
     @SerializedName("timezones")
-    val mTimezones: MutableList<String>,
+    val timezones: MutableList<String>,
 
     @SerializedName("latlng")
-    val mLatLng: MutableList<Double>,
+    val latLng: MutableList<Double>,
 
     @SerializedName("name")
-    val mName: String,
+    val name: String,
 
     @SerializedName("country_code")
-    val MCountryCode: String,
+    val countryCode: String,
 
     @SerializedName("capital")
-    val MCapital: String,
+    val capital: String,
 
-    var mDistance: Double
+    var distance: Double
 
 )
 
 fun CountriesModel.toLocation() :LatLng{
-    return LatLng(mLatLng[0],mLatLng[1])
+    return LatLng(latLng[0],latLng[1])
 }
