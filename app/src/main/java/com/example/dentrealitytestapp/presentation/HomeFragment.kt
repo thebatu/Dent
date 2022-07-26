@@ -46,7 +46,7 @@ class HomeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener, OnMapReady
     private fun displayMarkersOptions(googleMap: GoogleMap, country: CountriesModel){
         googleMap.addMarker(
             MarkerOptions()
-                .snippet(country.distance.toString())
+                .snippet(country.capital)
                 .title(country.name)
                 .position(country.toLocation())
         )
