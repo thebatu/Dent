@@ -3,4 +3,9 @@
 
     <!-- Details screen-->
     <string name="submit">Set as Home Country</string>
+    <string name="country_set"> Country Updated</string>
+    <string name="capital">Capital:-</string>
+    <string name="country">Country:-</string>
+    <string name="distance">Distance:-</string>
+
 </resources>

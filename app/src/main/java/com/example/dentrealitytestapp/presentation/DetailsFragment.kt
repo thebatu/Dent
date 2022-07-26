@@ -1,11 +1,14 @@
 package com.example.dentrealitytestapp.presentation
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.View
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.navArgs
 import com.example.dentrealitytestapp.R
+import com.example.dentrealitytestapp.data.util.Utils
+import com.example.dentrealitytestapp.data.util.Utils.FormatNumber.formatNum
 import com.example.dentrealitytestapp.databinding.FragmentDetailsBinding
 
 
@@ -23,6 +26,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
 
         binding.submitBtn.setOnClickListener {
             viewModel.setUserCountry(args.countryName)
+            Toast.makeText(activity, R.string.country_set, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -34,7 +38,7 @@ class DetailsFragment : Fragment(R.layout.fragment_details) {
         binding.apply {
             countryCapital.text = selectedCountry?.capital
             countryName.text = selectedCountry?.name
-            distanceValue.text = selectedCountry?.distance.toString()
+            distanceValue.text = formatNum(selectedCountry?.distance)
         }
     }
 

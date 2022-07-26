@@ -4,20 +4,20 @@ plugins {
     id 'kotlin-kapt'
     id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
     id 'androidx.navigation.safeargs'
-
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
     compileSdk 32
 
     defaultConfig {
-        applicationId "com.example.dentrealitytestapp"
+        applicationId 'com.example.dentrealitytestapp'
         minSdk 24
         targetSdk 32
         versionCode 1
-        versionName "1.0"
+        versionName '1.0'
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
     }
 
     buildTypes {
@@ -51,7 +51,7 @@ dependencies {
 
     //viewModel
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.0'
-    implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.0"
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-savedstate:2.5.0'
 
     //lifecycle-extensions
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.0'
@@ -62,24 +62,28 @@ dependencies {
     implementation 'com.google.maps.android:maps-utils-ktx:3.2.1'
 
     //coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
+    implementation('org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4')
 
     //fragment
-    implementation "androidx.fragment:fragment-ktx:1.5.0"
+    implementation 'androidx.fragment:fragment-ktx:1.5.0'
 
     //activity
-    implementation "androidx.activity:activity-ktx:1.5.0"
+    implementation 'androidx.activity:activity-ktx:1.5.0'
 
     //jetpack navigation
-    implementation "androidx.navigation:navigation-fragment-ktx:2.5.0"
-    implementation "androidx.navigation:navigation-ui-ktx:2.5.0"
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.0'
 
     //serializer Gson
     implementation 'com.google.code.gson:gson:2.9.0'
 
     //coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.0")
+    implementation('org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4')
+    implementation('androidx.lifecycle:lifecycle-livedata-ktx:2.5.0')
+
+    //Hilt dependency Injection framework
+    implementation 'com.google.dagger:hilt-android:2.40'
+    kapt 'com.google.dagger:hilt-android-compiler:2.40'
 
 
 

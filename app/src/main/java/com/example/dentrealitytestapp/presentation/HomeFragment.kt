@@ -9,6 +9,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.dentrealitytestapp.R
+import com.example.dentrealitytestapp.databinding.FragmentDetailsBinding
+import com.example.dentrealitytestapp.databinding.FragmentHomefragmentBinding
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -17,11 +19,14 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.example.dentrealitytestapp.models.CountriesModel
 import com.example.dentrealitytestapp.models.toLocation
 import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener, OnMapReadyCallback{
 
     private val viewModel: MainActivityViewModel by activityViewModels()
     private lateinit var map: GoogleMap
+    private lateinit var binding: FragmentHomefragmentBinding
+
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
@@ -66,7 +71,10 @@ class HomeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener, OnMapReady
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding = FragmentHomefragmentBinding.bind(view)
+
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
+
     }
 }
