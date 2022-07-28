@@ -21,7 +21,7 @@ class Utils {
     object FormatNumber {
         fun formatNum(num: Double?): String {
             val df = DecimalFormat("#######,###")
-            return df.format(num) + Constants.KM
+            return "${df.format(num)} ${Constants.KM}"
         }
     }
 }

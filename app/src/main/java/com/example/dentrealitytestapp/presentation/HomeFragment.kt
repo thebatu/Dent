@@ -21,7 +21,7 @@ import com.example.dentrealitytestapp.models.toLocation
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
-class HomeFragment : Fragment(), GoogleMap.OnInfoWindowClickListener, OnMapReadyCallback{
+class HomeFragment: Fragment(), GoogleMap.OnInfoWindowClickListener, OnMapReadyCallback{
 
     private val viewModel: MainActivityViewModel by activityViewModels()
     private lateinit var map: GoogleMap
